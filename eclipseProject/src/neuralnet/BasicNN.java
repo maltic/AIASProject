@@ -59,7 +59,11 @@ public class BasicNN implements NeuralNetwork {
 
 	@Override
 	public double threshold(double o) {
-		return 1 / (1 + Math.exp(-o));
+		return (o > 0.0) ? 1.0 : 0.0;
+		/*
+		 * if (o < -15) return 0; if (o > 15) return 1; return 1 / (1 +
+		 * Math.exp(-o));
+		 */
 	}
 
 	@Override

@@ -12,7 +12,7 @@ public class BattleRunner extends BattleAdaptor {
 
 		// Called when the battle is completed successfully with battle results
 		public void onBattleCompleted(BattleCompletedEvent e) {
-			//System.out.println("-- Battle has completed --");
+			// System.out.println("-- Battle has completed --");
 			br = e.getIndexedResults();
 
 		}
@@ -20,12 +20,12 @@ public class BattleRunner extends BattleAdaptor {
 		// Called when the game sends out an information message during the
 		// battle
 		public void onBattleMessage(BattleMessageEvent e) {
-			//System.out.println("Msg> " + e.getMessage());
+			// System.out.println("Msg> " + e.getMessage());
 		}
 
 		// Called when the game sends out an error message during the battle
 		public void onBattleError(BattleErrorEvent e) {
-			//System.out.println("Err> " + e.getError());
+			// System.out.println("Err> " + e.getError());
 		}
 	}
 
@@ -40,13 +40,13 @@ public class BattleRunner extends BattleAdaptor {
 		re.addBattleListener(bo);
 		BattlefieldSpecification bfs = new BattlefieldSpecification();
 		RobotSpecification[] robots = re
-				.getLocalRepository("sample.MyFirstRobot,MR.MaxRobot*");
-		bs = new BattleSpecification(10, bfs, robots);
+				.getLocalRepository("sample.Crazy,MR.DataBot*");
+		bs = new BattleSpecification(100, bfs, robots);
 	}
 
 	public BattleResults runBattle() {
 		re.runBattle(bs, true);
-		//System.out.println("Done");
+		// System.out.println("Done");
 		return bo.br[1];
 	}
 }

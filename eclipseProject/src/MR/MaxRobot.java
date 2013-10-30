@@ -14,8 +14,7 @@ public class MaxRobot extends AdvancedRobot {
 
 	public void run() {
 		try {
-			FileReader fr = new FileReader(
-					"C:/robocode/robots/MR/roboSpec");
+			FileReader fr = new FileReader("C:/robocode/robots/MR/roboSpec");
 			Scanner sc = new Scanner(fr);
 			int nLayers = sc.nextInt();
 			int[] layers = new int[nLayers];
@@ -33,20 +32,21 @@ public class MaxRobot extends AdvancedRobot {
 		}
 
 		while (true) {
-			this.setAhead(-100);
-			this.setTurnLeft(1000);
+			this.setAhead(-10);
+			this.setTurnLeft(10);
 			this.execute();
 		}
 	}
 
 	public void onScannedRobot(ScannedRobotEvent e) {
-		double[] input = new double[3];
-		input[0] = e.getDistance();
-		input[1] = e.getVelocity();
-		input[2] = e.getBearing();
-		double[] out = nn.feedForward(input);
-		if(out[0] > 0.00001)
-			this.setFire(1.0);
+		double[] inputs = new double[3];
+		inputs[0] = e.getDistance();
+		inputs[1] = this.getHeading();
+		inputs[2] = this.getEnergy();
+		double[] out = nn.feedForward(inputs);
+		if (out[0] > 0.04)
+			this.setFire(out[0] * 3);
+		this.execute();
 	}
 
 }

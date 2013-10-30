@@ -76,4 +76,12 @@ public class NeuroEvolver {
 			l.add(populations[a][0]);
 		return l;
 	}
+
+	public double getAvgFitness() {
+		double tot = 0.0;
+		for (int a = 0; a < populations.length; ++a)
+			for (int b = 0; b < populations[a].length; ++b)
+				tot += populations[a][b].fitness;
+		return tot / (populations.length * populations[0].length);
+	}
 }

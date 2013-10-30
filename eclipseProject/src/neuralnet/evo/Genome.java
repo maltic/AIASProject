@@ -42,9 +42,10 @@ public class Genome implements Comparable<Genome> {
 
 	public Genome(FitCalc f, int size) {
 		weights = new double[size];
+		// was 16
 		for (int i = 0; i < size; ++i)
-			weights[i] += (r.nextBoolean()) ? r.nextDouble() * 16 : -r
-					.nextDouble() * 16;
+			weights[i] += (r.nextBoolean()) ? r.nextDouble() * 1 : -r
+					.nextDouble() * 1;
 		fitness = f.fitness(this);
 	}
 
@@ -52,8 +53,9 @@ public class Genome implements Comparable<Genome> {
 		int mutations = r.nextInt(weights.length / 2);
 		double[] w = this.weights.clone();
 		for (int i = 0; i < mutations; ++i) {
-			w[r.nextInt(weights.length)] += (r.nextBoolean()) ? r.nextDouble() * 3
-					: -r.nextDouble() * 3;
+			// was 3
+			w[r.nextInt(weights.length)] += (r.nextBoolean()) ? r.nextDouble() * 1
+					: -r.nextDouble() * 1;
 		}
 		return new Genome(f, w);
 	}
