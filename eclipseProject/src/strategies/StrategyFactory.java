@@ -12,8 +12,8 @@ public class StrategyFactory {
 	public static final int MovementStrategies = 6;
 	public static final int FireStrategies = 6;
 	public static final int ScanStrategies = 4;
-	public static final int GunStrategies = 1;
-	
+	public static final int GunStrategies = 2;
+
 	public Strategy getMovementStrategy(int id) {
 		switch (id) {
 		case 0:
@@ -66,10 +66,12 @@ public class StrategyFactory {
 			return null;
 		}
 	}
-	
+
 	public Strategy getGunStrategy(int id) {
 		switch (id) {
 		case 0:
+			return new SlowFollowScannerGun();
+		case 1:
 			return new SlowFollowScannerGun();
 		default:
 			return null;
