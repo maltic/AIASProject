@@ -6,6 +6,9 @@ public class BasicNN implements NeuralNetwork {
 	protected double[][] outputs;
 	protected int numWeights;
 
+	public BasicNN() {
+	}
+
 	public BasicNN(int[] layers) {
 		this.layers = layers.clone();
 		weights = new double[layers.length][][];
@@ -16,6 +19,10 @@ public class BasicNN implements NeuralNetwork {
 		}
 		for (int i = 0; i < layers.length; ++i)
 			outputs[i] = new double[layers[i]];
+	}
+
+	protected void clearOutputs() {
+
 	}
 
 	@Override
@@ -60,10 +67,6 @@ public class BasicNN implements NeuralNetwork {
 	@Override
 	public double threshold(double o) {
 		return (o > 0.0) ? 1.0 : 0.0;
-		/*
-		 * if (o < -15) return 0; if (o > 15) return 1; return 1 / (1 +
-		 * Math.exp(-o));
-		 */
 	}
 
 	@Override

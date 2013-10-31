@@ -36,13 +36,14 @@ public class DataBot extends AdvancedRobot {
 		bulletData = new ArrayList<BulletData>();
 		bulletMap = new HashMap<Bullet, BulletData>();
 		while (true) {
-			ahead(10);
-			turnLeft(10);
+			setAhead(10);
+			setTurnLeft(10);
+			this.execute();
 		}
 	}
 
 	public void onScannedRobot(ScannedRobotEvent e) {
-		Bullet b = fireBullet(1.0);
+		Bullet b = setFireBullet(1.0);
 		this.bulletMap.put(b,
 				new BulletData(b, getX(), getY(), e.getDistance(), getEnergy(),
 						e.getEnergy(), e.getVelocity(), e.getHeading()));

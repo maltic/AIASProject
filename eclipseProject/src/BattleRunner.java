@@ -33,20 +33,19 @@ public class BattleRunner extends BattleAdaptor {
 	BattleObserver bo;
 	BattleSpecification bs;
 
-	public BattleRunner() {
+	public BattleRunner(String r, int numRounds) {
 		re = new RobocodeEngine(new File("C:/robocode/"));
 		bo = new BattleObserver();
 		re.setVisible(true);
 		re.addBattleListener(bo);
 		BattlefieldSpecification bfs = new BattlefieldSpecification();
-		RobotSpecification[] robots = re
-				.getLocalRepository("sample.Crazy,MR.DataBot*");
-		bs = new BattleSpecification(100, bfs, robots);
+		RobotSpecification[] robots = re.getLocalRepository(r);
+		bs = new BattleSpecification(numRounds, bfs, robots);
 	}
 
-	public BattleResults runBattle() {
+	public BattleResults[] runBattle() {
 		re.runBattle(bs, true);
 		// System.out.println("Done");
-		return bo.br[1];
+		return bo.br;
 	}
 }

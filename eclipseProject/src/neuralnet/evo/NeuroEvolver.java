@@ -61,7 +61,7 @@ public class NeuroEvolver {
 		int popa = r.nextInt(populations.length);
 		int popb = r.nextInt(populations.length);
 		populations[popa][populations[popa].length - 1] = populations[popb][0];
-		populations[popb][populations[popb].length - 1] = populations[popb][0];
+		populations[popb][populations[popb].length - 1] = populations[popa][0];
 		select(popa);
 		select(popb);
 	}

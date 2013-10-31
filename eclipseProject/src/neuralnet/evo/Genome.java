@@ -7,6 +7,7 @@ import neuralnet.NeuralNetwork;
 public class Genome implements Comparable<Genome> {
 	protected final double[] weights;
 	protected final double fitness;
+	protected Random r = new Random();
 
 	protected static class FitCalc {
 		private FitnessArbiter f;
@@ -32,8 +33,6 @@ public class Genome implements Comparable<Genome> {
 		return this.weights.clone();
 	}
 
-	protected static Random r = new Random();
-
 	public Genome(FitCalc f, double[] w) {
 		weights = w.clone();
 		fitness = f.fitness(this);
@@ -44,8 +43,8 @@ public class Genome implements Comparable<Genome> {
 		weights = new double[size];
 		// was 16
 		for (int i = 0; i < size; ++i)
-			weights[i] += (r.nextBoolean()) ? r.nextDouble() * 1 : -r
-					.nextDouble() * 1;
+			weights[i] += (r.nextBoolean()) ? r.nextDouble() * 15 : -r
+					.nextDouble() * 15;
 		fitness = f.fitness(this);
 	}
 
@@ -54,8 +53,8 @@ public class Genome implements Comparable<Genome> {
 		double[] w = this.weights.clone();
 		for (int i = 0; i < mutations; ++i) {
 			// was 3
-			w[r.nextInt(weights.length)] += (r.nextBoolean()) ? r.nextDouble() * 1
-					: -r.nextDouble() * 1;
+			w[r.nextInt(weights.length)] += (r.nextBoolean()) ? r.nextDouble() * 3
+					: -r.nextDouble() * 3;
 		}
 		return new Genome(f, w);
 	}
