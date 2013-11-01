@@ -41,14 +41,20 @@ public class ScriptBot extends AdvancedRobot {
 			data.scannerHeading = this.getRadarHeading();
 			data.x = this.getX();
 			data.y = this.getY();
-			move = scanning.getNextMove(data);
-			this.setTurnRadarLeft(move[0]);
 			move = movement.getNextMove(data);
 			this.setAhead(move[0]);
 			this.setTurnLeft(move[1]);
+			move = scanning.getNextMove(data);
+			this.setTurnRadarLeft(move[0]);
 			move = gun.getNextMove(data);
 			this.setTurnGunLeft(move[0]);
+			double dist = Math.atan2(
+					Math.sin(data.scannedDirection - data.gunHeading),
+					Math.cos(data.scannedDirection - data.gunHeading));
+			if (dist < 5.0 && data.scannedAge < 3)
+				this.setFire(firing.getNextMove(data)[0]);
 			this.execute();
+			//this.scan();
 		}
 	}
 
@@ -59,7 +65,7 @@ public class ScriptBot extends AdvancedRobot {
 		data.scannedDistance = e.getDistance();
 		data.scannedBearing = e.getBearing();
 		data.scannedAge = 0;
-		setFire(firing.getNextMove(data)[0]);
+		// this.setFire(firing.getNextMove(data)[0]);
 	}
 
 }

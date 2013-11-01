@@ -144,10 +144,15 @@ class RCFitCalc implements FitnessCalculator {
 
 public class Main {
 	public static void main(String[] args) {
-		// BattleRunner br = new BattleRunner("sample.Walls,MR.ScriptBot*",
-		// 100);
-		// br.runBattle();
-		// System.exit(0);
+//		BattleRunner br = new BattleRunner("sample.Walls,MR.ScriptBot*", 100);
+//		br.runBattle();
+//		try {
+//			Thread.sleep(1000000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		System.exit(0);
 		runACO();
 
 	}
@@ -179,7 +184,7 @@ public class Main {
 
 	public static void runACO() {
 		FitnessCalculator f = new RCFitCalc();
-		AntOptimizer ao = new AntOptimizer(16, new int[] {
+		AntOptimizer ao = new AntOptimizer(32, new int[] {
 				StrategyFactory.MovementStrategies,
 				StrategyFactory.FireStrategies, StrategyFactory.ScanStrategies,
 				StrategyFactory.GunStrategies }, f);

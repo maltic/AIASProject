@@ -1,18 +1,15 @@
 package strategies;
 
 import strategies.firing.*;
-import strategies.gun.SlowFollowScannerGun;
+import strategies.gun.*;
 import strategies.movement.*;
-import strategies.scanning.MatchSlowRobotScan;
-import strategies.scanning.FastSpinScan;
-import strategies.scanning.SlowPredictiveScan;
-import strategies.scanning.SlowSpinScan;
+import strategies.scanning.*;
 
 public class StrategyFactory {
 	public static final int MovementStrategies = 6;
 	public static final int FireStrategies = 6;
 	public static final int ScanStrategies = 4;
-	public static final int GunStrategies = 2;
+	public static final int GunStrategies = 5;
 
 	public Strategy getMovementStrategy(int id) {
 		switch (id) {
@@ -72,7 +69,13 @@ public class StrategyFactory {
 		case 0:
 			return new SlowFollowScannerGun();
 		case 1:
-			return new SlowFollowScannerGun();
+			return new FastFollowScannerGun();
+		case 2:
+			return new SlowSpinGun();
+		case 3:
+			return new FastSpinGun();
+		case 4:
+			return new FollowEnemyGun();
 		default:
 			return null;
 		}
