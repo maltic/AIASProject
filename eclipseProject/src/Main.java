@@ -22,7 +22,7 @@ class RCFitness implements neuralnet.evo.FitnessArbiter {
 	BattleRunner br;
 
 	public RCFitness() {
-		br = new BattleRunner("sample.Walls,MR.NNBot*", 10);
+		br = new BattleRunner("sample.MyFirstRobot,MR.NNScriptBot*", 10);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ class RCFitness implements neuralnet.evo.FitnessArbiter {
 
 		try {
 			PrintStream s = new PrintStream(new File(
-					"C:/robocode/robots/MR/roboSpec"));
+					"C:/robocode/robots/MR/scriptBotNNSpec"));
 			double[] weights = nn.getWeights();
 			int[] layers = nn.getLayers().clone();
 			s.println(layers.length);
@@ -144,16 +144,17 @@ class RCFitCalc implements FitnessCalculator {
 
 public class Main {
 	public static void main(String[] args) {
-//		BattleRunner br = new BattleRunner("sample.Walls,MR.ScriptBot*", 100);
-//		br.runBattle();
-//		try {
-//			Thread.sleep(1000000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		System.exit(0);
-		runACO();
+		// BattleRunner br = new BattleRunner("sample.Walls,MR.ScriptBot*",
+		// 100);
+		// br.runBattle();
+		// try {
+		// Thread.sleep(1000000);
+		// } catch (InterruptedException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// System.exit(0);
+		trainNeuralNet();
 
 	}
 
@@ -165,7 +166,7 @@ public class Main {
 		ne.crossoverRate = 0.35f;
 		ne.keepNum = 1;
 		List<Genome> best = null;
-		for (int i = 0; i < 10; ++i) {
+		for (int i = 0; i < 25; ++i) {
 			ne.evolveStep();
 			best = ne.getBest();
 			Collections.sort(best);

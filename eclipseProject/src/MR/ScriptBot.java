@@ -13,7 +13,7 @@ import strategies.StrategyFactory;
 public class ScriptBot extends AdvancedRobot {
 
 	private Strategy movement, firing, scanning, gun;
-	private RobotData data;
+	protected RobotData data;
 
 	public void run() {
 		try {
@@ -32,6 +32,7 @@ public class ScriptBot extends AdvancedRobot {
 		}
 		double[] move;
 		data = new RobotData();
+		out.println("fdsf");
 		this.setAdjustRadarForGunTurn(true);
 		this.setAdjustGunForRobotTurn(true);
 		this.setAdjustRadarForRobotTurn(true);
@@ -54,13 +55,16 @@ public class ScriptBot extends AdvancedRobot {
 					data.scannedX - data.x));
 			double diff = Math.abs(rightDir - data.gunHeading);
 			double dist = Math.min(diff, 360 - diff);
-			out.println(dist);
-			if (Math.abs(dist) < 10 && data.scannedAge < 5) {
+			if (fireThreshold(dist, data.scannedAge)) {
 				this.setFire(firing.getNextMove(data)[0]);
 			}
 			this.execute();
 			// this.scan();
 		}
+	}
+
+	protected boolean fireThreshold(double dist, int age) {
+		return Math.abs(dist) < 10 && data.scannedAge < 5;
 	}
 
 	public void onScannedRobot(ScannedRobotEvent e) {
