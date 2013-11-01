@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import robocode.*;
+import robocode.util.Utils;
 import strategies.RobotData;
 import strategies.Strategy;
 import strategies.StrategyFactory;
@@ -48,13 +49,17 @@ public class ScriptBot extends AdvancedRobot {
 			this.setTurnRadarLeft(move[0]);
 			move = gun.getNextMove(data);
 			this.setTurnGunLeft(move[0]);
-			double dist = Math.atan2(
-					Math.sin(data.scannedDirection - data.gunHeading),
-					Math.cos(data.scannedDirection - data.gunHeading));
-			if (dist < 5.0 && data.scannedAge < 3)
+
+			double rightDir = Math.toDegrees(Math.atan2(data.scannedY - data.y,
+					data.scannedX - data.x));
+			double diff = Math.abs(rightDir - data.gunHeading);
+			double dist = Math.min(diff, 360 - diff);
+			out.println(dist);
+			if (Math.abs(dist) < 10 && data.scannedAge < 5) {
 				this.setFire(firing.getNextMove(data)[0]);
+			}
 			this.execute();
-			//this.scan();
+			// this.scan();
 		}
 	}
 
@@ -64,6 +69,10 @@ public class ScriptBot extends AdvancedRobot {
 		data.scannedVelocity = e.getVelocity();
 		data.scannedDistance = e.getDistance();
 		data.scannedBearing = e.getBearing();
+		data.scannedX = data.x + Math.cos(Math.toRadians(data.scannerHeading))
+				* data.scannedDistance;
+		data.scannedY = data.y + Math.sin(Math.toRadians(data.scannerHeading))
+				* data.scannedDistance;
 		data.scannedAge = 0;
 		// this.setFire(firing.getNextMove(data)[0]);
 	}

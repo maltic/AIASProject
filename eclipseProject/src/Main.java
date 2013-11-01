@@ -178,7 +178,7 @@ public class Main {
 	}
 
 	public static void collectData() {
-		BattleRunner br = new BattleRunner("sample.Walls,MR.DataBot*", 100);
+		BattleRunner br = new BattleRunner("sample.RamFire,MR.DataBot*", 100);
 		br.runBattle();
 	}
 
