@@ -1,10 +1,12 @@
 package ants;
 
+import robotrain.GenericFitness;
+
 public class AntWalk implements Comparable<AntWalk> {
 	public int[] solution;
 	public double fitness;
 
-	public AntWalk(int[] solution, FitnessCalculator fc) {
+	public AntWalk(int[] solution, GenericFitness<int[]> fc) {
 		this.fitness = fc.calculateFitness(solution);
 		this.solution = solution;
 	}

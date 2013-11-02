@@ -28,7 +28,7 @@ public class BiasNN extends BasicNN {
 
 	@Override
 	public double threshold(double o) {
-
+		//sigmoid function
 		if (o < -15)
 			return 0;
 		if (o > 15)

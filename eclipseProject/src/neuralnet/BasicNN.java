@@ -1,5 +1,7 @@
 package neuralnet;
 
+import java.util.Scanner;
+
 public class BasicNN implements NeuralNetwork {
 	protected int[] layers;
 	protected double[][][] weights;
@@ -19,10 +21,6 @@ public class BasicNN implements NeuralNetwork {
 		}
 		for (int i = 0; i < layers.length; ++i)
 			outputs[i] = new double[layers[i]];
-	}
-
-	protected void clearOutputs() {
-
 	}
 
 	@Override

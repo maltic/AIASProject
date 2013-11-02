@@ -1,6 +1,8 @@
 package ants;
 
-class OddFit implements FitnessCalculator {
+import robotrain.GenericFitness;
+
+class OddFit implements GenericFitness<int[]> {
 
 	@Override
 	public double calculateFitness(int[] antSolution) {

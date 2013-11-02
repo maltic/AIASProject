@@ -2,28 +2,13 @@ package neuralnet.evo;
 
 import java.util.Random;
 
+import robotrain.GenericFitness;
 import neuralnet.NeuralNetwork;
 
 public class Genome implements Comparable<Genome> {
 	protected final double[] weights;
 	protected final double fitness;
 	protected Random r = new Random();
-
-	protected static class FitCalc {
-		private FitnessArbiter f;
-		private NeuralNetwork nn;
-
-		public FitCalc(FitnessArbiter f, NeuralNetwork nn) {
-			this.f = f;
-			this.nn = nn;
-		}
-
-		public double fitness(Genome g) {
-			nn.setWeights(g.weights);
-			return f.fitness(nn);
-		}
-
-	}
 
 	public double getFitness() {
 		return fitness;
@@ -33,22 +18,24 @@ public class Genome implements Comparable<Genome> {
 		return this.weights.clone();
 	}
 
-	public Genome(FitCalc f, double[] w) {
+	public Genome(GenericFitness<NeuralNetwork> f, NeuralNetwork nn, double[] w) {
 		weights = w.clone();
-		fitness = f.fitness(this);
+		nn.setWeights(this.weights);
+		fitness = f.calculateFitness(nn);
 
 	}
 
-	public Genome(FitCalc f, int size) {
+	public Genome(GenericFitness<NeuralNetwork> f, NeuralNetwork nn, int size) {
 		weights = new double[size];
 		// was 16
 		for (int i = 0; i < size; ++i)
 			weights[i] += (r.nextBoolean()) ? r.nextDouble() * 15 : -r
 					.nextDouble() * 15;
-		fitness = f.fitness(this);
+		nn.setWeights(this.weights);
+		fitness = f.calculateFitness(nn);
 	}
 
-	public Genome mutate(FitCalc f) {
+	public Genome mutate(GenericFitness<NeuralNetwork> f, NeuralNetwork nn) {
 		int mutations = r.nextInt(weights.length / 2);
 		double[] w = this.weights.clone();
 		for (int i = 0; i < mutations; ++i) {
@@ -56,17 +43,18 @@ public class Genome implements Comparable<Genome> {
 			w[r.nextInt(weights.length)] += (r.nextBoolean()) ? r.nextDouble() * 3
 					: -r.nextDouble() * 3;
 		}
-		return new Genome(f, w);
+		return new Genome(f, nn, w);
 	}
 
-	public Genome crossover(FitCalc f, Genome other) {
+	public Genome crossover(GenericFitness<NeuralNetwork> f, NeuralNetwork nn,
+			Genome other) {
 		int split = r.nextInt(weights.length - 1);
 		double[] w = new double[weights.length];
 		for (int i = 0; i < split; ++i)
 			w[i] = weights[i];
 		for (int i = split; i < weights.length; ++i)
 			w[i] = other.weights[i];
-		return new Genome(f, w);
+		return new Genome(f, nn, w);
 	}
 
 	@Override
