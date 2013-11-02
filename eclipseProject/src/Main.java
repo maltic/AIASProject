@@ -5,10 +5,9 @@ import robotrain.*;
 
 public class Main {
 	public static void main(String[] args) {
-		RobocodeLearning.learnWithNeuralNet("sample.RamFire");
-		AntWalk result = RobocodeLearning.learnWithACO("sample.RamFire");
+		AntWalk result = RobocodeLearning.learnWithACO("sample.Tracker");
 		RobocodeLearning.learnACOTargetingWithNeuralNet(result,
-				"sample.RamFire");
+				"sample.Tracker");
 		System.exit(0);
 
 	}

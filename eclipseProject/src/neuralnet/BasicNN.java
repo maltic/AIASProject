@@ -1,7 +1,5 @@
 package neuralnet;
 
-import java.util.Scanner;
-
 public class BasicNN implements NeuralNetwork {
 	protected int[] layers;
 	protected double[][][] weights;
