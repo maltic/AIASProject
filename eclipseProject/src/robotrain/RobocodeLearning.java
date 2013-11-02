@@ -21,6 +21,27 @@ public class RobocodeLearning {
 				StrategyFactory.FireStrategies, StrategyFactory.ScanStrategies,
 				StrategyFactory.GunStrategies }, new ACOFitness(enemy,
 				"maxsbots.ScriptBot*", "scriptBotSpec", 40));
+		return (AntWalk)learnAStrategy(ao, enemy);
+	}
+	
+	public static strategies.StrategySolution learnWithGA(String enemy) {
+		ga.GAOptimizerSettings settings = new ga.GAOptimizerSettings();
+		settings.size = 32;
+		settings.breed = 0.4;
+		settings.mutation = 0.2;
+		settings.elitism = 0.1;
+		settings.maxevolvetrials = 64;
+		settings.mutationLambda = 2;
+		settings.tourney = 3;		
+		ga.GAOptimizer ao = new ga.GAOptimizer(settings, new int[] {
+				StrategyFactory.MovementStrategies,
+				StrategyFactory.FireStrategies, StrategyFactory.ScanStrategies,
+				StrategyFactory.GunStrategies }, new ACOFitness(enemy,
+				"maxsbots.ScriptBot*", "scriptBotSpec", 40));
+		return learnAStrategy(ao, enemy);
+	}
+	
+	public static strategies.StrategySolution learnAStrategy(strategies.StrategyOptimizer ao, String enemy) {
 		return ao.train(25);
 	}
 
@@ -31,14 +52,14 @@ public class RobocodeLearning {
 		return ne.train(100);
 	}
 
-	public static List<Genome> learnACOTargetingWithNeuralNet(AntWalk antWalk,
+	public static List<Genome> learnTargetingGivenStrategyWithNeuralNet(strategies.StrategySolution antWalk,
 			String enemy) {
 		// because we are calculating the fitness, the scriptBotSpec will have
 		// the right aco information in it ready for neuralevolution
 		ACOFitness af = new ACOFitness(enemy, "maxsbots.ScriptBot*",
 				"scriptBotSpec", 40);
 		System.out.println("Initial fitness of ACO bot: "
-				+ af.calculateFitness(antWalk.solution));
+				+ af.calculateFitness(antWalk.getSolution()));
 		// now refine targeting using neuroevolution
 		NeuralNetwork nn = new BiasNN(new int[] { 2, 3, 1 });
 		NeuroEvolver ne = new NeuroEvolver(nn, new NNFitness(enemy,
