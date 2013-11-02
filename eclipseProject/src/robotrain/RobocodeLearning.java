@@ -46,7 +46,7 @@ public class RobocodeLearning {
 	}
 
 	public static List<Genome> learnWithNeuralNet(String enemy) {
-		NeuralNetwork nn = new BiasNN(new int[] { 12, 13, 7, 5 });
+		NeuralNetwork nn = new BiasNN(new int[] { 13, 15, 7, 5 });
 		NeuroEvolver ne = new NeuroEvolver(nn, new NNFitness(enemy,
 				"maxsbots.NNBot*", "roboSpec", 40), 32, 3);
 		return ne.train(100);

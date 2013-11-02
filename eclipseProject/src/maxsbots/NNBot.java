@@ -48,7 +48,8 @@ public class NNBot extends AdvancedRobot {
 					scannedX / width, scannedY / height,
 					Math.max(scanAge / 15.0, 1.0), getX() / width,
 					getY() / height, getEnergy() / 100, getHeading() / 360,
-					getRadarHeading() / 360, getGunHeading() / 360 };
+					getRadarHeading() / 360, getGunHeading() / 360,
+					(getVelocity() + 8) / 16 };
 			// feed into neural net
 			double[] out = nn.feedForward(input);
 			// execute neural net actions

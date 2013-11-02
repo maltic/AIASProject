@@ -53,7 +53,7 @@ public class GAOptimizer implements strategies.StrategyOptimizer {
 			simulationStep();
 			Candidate bestC = this.getBestInPool();
 			System.out.println(i + " : " + bestC.fitness + " , " + this.average);
-			System.out.print("The best ant solution was: <");
+			System.out.print("The best solution was: <");
 			for (int j = 0; j < bestC.solution.length; ++j)
 				System.out.print(bestC.solution[j]
 						+ ((j == bestC.solution.length - 1) ? "" : ", "));
