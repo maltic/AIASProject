@@ -15,7 +15,7 @@ import robocode.control.events.*;
  */
 public class BattleRunner extends BattleAdaptor {
 
-	public static final String RobocodePath = "C:/robocode";
+	public static final String RobocodePath = System.getenv("ROBOCODE");
 
 	/**
 	 * @author Max A callback class that listens to the robocode engine
