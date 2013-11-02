@@ -2,7 +2,7 @@ package ants;
 
 import robotrain.GenericFitness;
 
-public class AntWalk implements Comparable<AntWalk> {
+public class AntWalk implements Comparable<AntWalk>, strategies.StrategySolution {
 	public int[] solution;
 	public double fitness;
 
@@ -20,4 +20,7 @@ public class AntWalk implements Comparable<AntWalk> {
 		else
 			return -1;
 	}
+	
+	public int[] getSolution() { return this.solution.clone(); }
+	public double getFitness() { return this.fitness; }
 }

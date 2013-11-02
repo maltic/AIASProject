@@ -10,7 +10,7 @@ import robotrain.GenericFitness;
  * @author Max
  * 
  */
-public class AntOptimizer {
+public class AntOptimizer implements strategies.StrategyOptimizer {
 	protected int numAnts;
 	/**
 	 * Specification of problem domain. This needs a little explaining. The
