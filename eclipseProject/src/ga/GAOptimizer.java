@@ -50,14 +50,14 @@ public class GAOptimizer implements strategies.StrategyOptimizer {
 		System.out.println("Generation# : MaximumFitness , AverageFitness");
 		System.out.println(0 + " : " + this.best + " , " + this.average);
 		for (int i = 1; i <= steps; ++i) {
-			simulationStep();
+			evolve();
 			Candidate bestC = this.getBestInPool();
-			System.out.println(i + " : " + bestC.fitness + " , " + this.average);
+			System.out.println(i + " : " + bestC.fitness + " , " + getAverage());
 			System.out.print("The best solution was: <");
 			for (int j = 0; j < bestC.solution.length; ++j)
 				System.out.print(bestC.solution[j]
 						+ ((j == bestC.solution.length - 1) ? "" : ", "));
-			System.out.println(">");
+			System.out.println("> with fitness: " + bestC.getFitness());
 		}
 		System.out.println("---------Ending GA-----------");		
 		return this.bestCandidate.clone();
@@ -86,10 +86,11 @@ public class GAOptimizer implements strategies.StrategyOptimizer {
 		} else { //Evolve current pool
 			Candidate[] newpool = new Candidate[settings.size];
 			java.util.HashSet<int[]> members = new java.util.HashSet<>();
-			int i = (int)java.lang.Math.floor(settings.elitism);	
+			int i = (int)java.lang.Math.floor(settings.size*settings.elitism);	
 			int trials = 0;
 			for (int j = 0; j < i; ++j) { //elitism
 				newpool[j] = this.pool[j];
+				//System.err.println("newpool[j].fitness: " + newpool[j].getFitness());
 			}
 			while (i < settings.size && trials < settings.maxevolvetrials) {
 				++trials;
@@ -108,17 +109,11 @@ public class GAOptimizer implements strategies.StrategyOptimizer {
 							newpool[i++] = new Candidate(c, fitCalc);
 						}
 					}
-				} else if (r.nextDouble() < settings.mutation) {
+				} else {
 					int[] c = this.select().mutate(this.domain, r, settings.mutationLambda);
 					if (!members.contains(c)) {
 						members.add(c);
 						newpool[i++] = new Candidate(c, fitCalc);
-					}
-				} else {
-					Candidate c = this.select();
-					if (!members.contains(c)) {
-						members.add(c.solution); //avoid clone
-						newpool[i++] = c;
 					}
 				}
 			}
@@ -144,7 +139,7 @@ public class GAOptimizer implements strategies.StrategyOptimizer {
 			if (winner == null) {
 				winner = c; 
 			} else {
-				if (winner.compareTo(c) < 0) {
+				if (winner.getFitness() < c.getFitness()) {
 					winner = c;
 				}
 			}

@@ -53,7 +53,7 @@ public class Candidate implements Comparable<Candidate>, strategies.StrategySolu
 	@Override
 	public int compareTo(Candidate other) {
 		// Compares two candidates
-		return Double.compare(this.fitness, other.fitness);
+		return -1*Double.compare(this.fitness, other.fitness);
 	}
 	
 	public Candidate clone() {
