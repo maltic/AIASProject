@@ -37,7 +37,8 @@ public class NNScriptBot extends ScriptBot {
 	@Override
 	protected boolean fireThreshold(double dist, int age) {
 		// input vector is normalized first
-		double[] in = new double[] { dist / 360, Math.max(age / 15.0, 1.0) };
+		double[] in = new double[] { (dist + 360) / 720,
+				Math.max(age / 15.0, 1.0) };
 		double[] out = nn.feedForward(in);
 		return out[0] > 0.5;
 	}

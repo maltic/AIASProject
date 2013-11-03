@@ -6,8 +6,8 @@ import robotrain.*;
 public class Main {
 	public static void main(String[] args) {
 		System.err.println(robotrain.BattleRunner.RobocodePath);
-		String strategy = "GA";
-		//String strategy = "ACO";
+		//String strategy = "GA";
+		String strategy = "ACO";
 		strategies.StrategySolution result;
 		switch (strategy) {
 		case "GA":
