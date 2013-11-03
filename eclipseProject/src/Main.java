@@ -6,8 +6,9 @@ import robotrain.*;
 public class Main {
 	public static void main(String[] args) {
 		
-		String strategy = "GA";
-		//String strategy = "ACO";
+		System.err.println(robotrain.BattleRunner.RobocodePath);
+		//String strategy = "GA";
+		String strategy = "ACO";
 		strategies.StrategySolution result;
 		String enemy = "sample.RamFire";
 		System.err.println("Enemy (" + enemy + "), Method: " + strategy);
