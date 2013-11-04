@@ -3,20 +3,38 @@
 \centering
 \includegraphics[width=\textwidth]{figures/{#1}}
 \caption{{#2}}
-\label{{#3}}
+\label{#3}
 \end{figure*}}
+
+\newcommand{\StrategyComparison}[6]{
+\begin{figure}
+\begin{minipage}[c]{0.45\linewidth}
+\includegraphics[width=\textwidth]{figures/{#1}}
+\caption{{#2}}
+\label{#3}
+\end{minipage}
+\begin{minipage}[c]{0.45\linewidth}
+\includegraphics[width=\textwidth]{figures/{#4}}
+\caption{{#5}}
+\label{#6}
+\end{minipage}
+\end{figure}
+}
 
 \newcommand{\FigACOvRamFire}{
 \makenewfigure{acoversusramfire}{Best and Average Fitness of ACO against RamFire}{aco:v:ramfire}}
 
-\newcommand{\FigACOvTracker}{
-\makenewfigure{acoversustracker}{Best and Average Fitness of ACO against Tracker}{aco:v:tracker}}
+\newcommand{\FigStrategyvTracker}{
+\StrategyComparison{acoversustracker}{Best and Average Fitness of ACO against Tracker}{aco:v:tracker}{gaversustracker}{Best and Average Fitness of GA against Tracker}{ga:v:tracker}}
 
-\newcommand{\FigGAvTracker}{
-\makenewfigure{gaversustracker}{Best and Average Fitness of GA against Tracker}{ga:v:tracker}}
 
-\newcommand{\FigGAvRamFire}{
-\makenewfigure{gaversusramfire}{Best and Average Fitness of GA against RamFire}{ga:v:ramfire}}
+\newcommand{\FigStrategyvRamFire}{
+\StrategyComparison{acoversusramfire}{Best and Average Fitness of ACO against RamFire}{aco:v:ramfire}{gaversusramfire}{Best and Average Fitness of GA against RamFire}{ga:v:ramfire}}
+
+
+\newcommand{\FigStrategyTune}{
+\StrategyComparison{neurotuningacoagainsttracker}{Neurotuning Tracking of the Best Combination Found using ACO against Tracker}{tune:aco:tracker}{neurotuninggaagainsttracker}{Neurotuning Tracking of the Best Combination Found using GA against Tracker}{tune:ga:tracker}
+}
 
 \newcommand{\FigNeurotuneACOvTracker}{
 \makenewfigure{neurotuningacoagainsttracker}{Neurotuning Tracking of the Best Combination Found using ACO against Tracker}{tune:aco:tracker}}
