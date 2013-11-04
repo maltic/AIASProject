@@ -1,0 +1,20 @@
+The genetic algorithm uses the same candidate solutions as the ants in the ACO implementation. 
+If strategies are being combined, and each strategy belongs to a particular class then each strategy in each class can be assigned arbitrarily a unique integer identifier. These identifiers become the genes. Each gene is an integer describing which member within a particular class of strategies to use.
+
+A collection of each of the class identifiers or integers describes is the genotype. In this application, a genotype is an ordered quadruple of integers. The first integer describes the movement strategy, the second describes the fire strategy, the third describes the scan strategy, and the fourth describes the gun movement strategy.
+
+A phenotype is therefore the actual robot which uses each of the strategies defined in the genotype. The fitness of a phenotype is measured by performing 40 rounds in Robocode with the predefined enemy robot and observing the ratio of the phenotype's score to the enemy's score.
+
+\begin{equation}
+\label{eqn:fitness}
+\text{Fitness}\left({phenotype}|{enemy}\right) = 
+\frac{S(p)}{S(p) + S(e)}
+\end{equation}
+
+The selection method used is Tournament selection. The version of tournament selection used here is to select a 3 members uniformly with replacement and take the fittest.
+
+The mutation operator which is used in this application is random reselection of a number of genes. The number of genes to mutate in a given genotype is modeled by a Poisson distribution with an expected number of mutations, $\lambda = 1$. Therefore, probabilistically, it is possible the selected individual will not be mutated to favour exploitation, or may have many (even greater than 1)  mutations favouring exploration.
+
+The method used in this applicaiton is the one-point crossover. It is hoped this would allow combinations which have a good gun-scan strategy would be able to combine with a good combination of movmement-fire.
+
+A simple method to achieve diversity in the population is to ensure members cannot be clones of each other. The genotype space is fairly small and therefore there is enough genetic diversity if all members are distinct.
