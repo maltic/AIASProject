@@ -1,4 +1,46 @@
 
 \subsubsection{Rate of Convergence}
-\subsubsection{Performance}
+
+The rate at which the investigated approaches converge seem to be approximately the same. The GA appears to converge faster than the ACO; however this may be due to a good random initialization or a choice of parameters which promotes early convergence.
+
+The best fitness of both methods are approximately equal for both. Different best strategies, however, were found for the methods but are very similar. The quadruples found are described in Table \ref{foundstrats}.
+
+
+\FigStrategyvRamFire
+\FigStrategyvTracker
+
+\subsubsection{Observed Behaviours}
+
+The best observed behaviours by fitness are described Table \ref{foundstrats}.
+
+\begin{table}
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+ & RamFire & Tracker \\
+\hline
+ACO & & $<1, 1, 2, 1>$ \\
+\hline
+GA & $<0, 3, 4, 1>$ & $<5, 1, 2, 1>$ \\
+\hline
+\end{tabular}
+\caption{Emergent Strategies Found using GA and ACO against the Selected Enemies RamFire and Tracker}
+\label{foundstrats}
+\end{table}
+
 \subsubsection{Amount of Diversity}
+
+The amount of diversity within the populations of ants and genotypes for both algorithms respectively appears to be greater within the genetic algorithm. This is evident because the average fitness is slightly lower for the GA. This means may only be due to the fact the pheromone evaporation rate is too small to increase the diversity of the ant population.
+
+\subsubsection{Neurotuning the Emergent Behaviours to Improve Performance}
+
+The fitness of the best found strategies was able to be improved using the neurotuning methodology. The maximum reached was higher for ACO than the GA. This may also be due to random chance while calculating fitnesses.
+
+\FigStrategyTune
+
+\subsubsection{Conclusion}
+In conclusion the two algorithms are very similar. Both were effective in learning strategies. Further, the rate of learning shown in Figures \ref{aco:v:ramfire}, \ref{ga:v:ramfire}, \ref{aco:v:tracker} and \ref{ga:v:tracker} are almost identical.
+
+While in these examples the best fitness was found using the genetic algorithm; it may have been due to random starting positions which favoured the fitness calculation in the genetic algorithm. The fitnesses which were achieved were approximately 85-90\%.
+
+Neurotuning improved the fitness of the emergent behaviours by approximately 5-10\%.

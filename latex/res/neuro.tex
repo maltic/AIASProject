@@ -10,13 +10,25 @@ During the first generation, most strategies looked like a random walk. Sometime
 
 An example of a simple heuristic used was shooting in the general direction of the enemy more likely than not. Other examples include a vague strafing movement to avoid the enemy's bullets. They were also less likely to ram into the walls at full speed.
 
-It appears that learning on Robocode on such a gross level was not feasible. Perhaps a larger neural network with more time and a larger population might be able to learn better behaviours.
+It appears that learning on Robocode on such a gross level was not feasible. 
 
 
 \FigNeurovTracker
 \FigNeurovRamFire
 
-\subsubsection{Performance}
-\subsubsection{Amount of Diversity}
 
-\subsection{Conclusion}
+\subsubsection{Amount of Diversity}
+A large gap between the average fitness and the maximum fitness indicates a certain amount of uncertainty. Different observed behaviours indiciate that the diversity within the populations is enough to escape local optima and find and exploit new strategies.
+
+\subsubsection{Improving Performance}
+A larger neural network with more time and a larger population might be able to learn better behaviours.
+
+A more refined set of inputs may also allow the robot to learn more effectively. For example, instead of simply keeping the last known enemy location we could have kept a number of past locations. This may have enabled our robot to learn the movement pattern of the enemy. This has the drawback of requiring many more inputs and weights to match.
+
+A techinque for improving the complexity would be to co-evolve useful, smaller neural networks for different modules. For example, there could be a module for each of the general actions a robot can make: moving, firing, scanning, and rotating the gun; as well as predicing the enemy's next position.  The output of this final network could be used as the input to the other neural networks; avoiding the learning of a massive neural network. This is not dissimilar to a divide-and-conquer approach.
+
+Modularizing Robocode may also allow smaller neural networks to learn more effective strategies and co-evolution may enable these to find interesting combination of techniques. We believe this would work because the effectiveness of our own ACO and genetic algorithm solutions based on selecting modular components which is the focus of the next experiment.
+
+
+\subsubsection{Conclusion}
+Overall because the fitness steadily increases as more generations are run, this experiment shows neuroevolution may be capable of learning a good strategy to defeat the RamFire and Tracker robots. Several changes such as modularization can be made in order to improve the rate of convergence.
