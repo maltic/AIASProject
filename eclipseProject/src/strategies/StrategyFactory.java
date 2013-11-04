@@ -5,6 +5,11 @@ import strategies.gun.*;
 import strategies.movement.*;
 import strategies.scanning.*;
 
+/**
+ * Used to create strategies from IDs
+ * @author Max
+ *
+ */
 public class StrategyFactory {
 	public static final int MovementStrategies = 6;
 	public static final int FireStrategies = 6;

@@ -1,13 +1,24 @@
 package ga;
 
-
-
-public class Candidate implements Comparable<Candidate>, strategies.StrategySolution {
+/**
+ * A candidate solution found by our GA
+ * 
+ * @author Max
+ * 
+ */
+public class Candidate implements Comparable<Candidate>,
+		strategies.StrategySolution {
 
 	protected int[] solution;
 	protected double fitness;
-	
-	
+
+	/**
+	 * @param domain
+	 *            The solution space definition
+	 * @param rand
+	 *            A PRNG
+	 * @return A new random solution
+	 */
 	public static int[] random(int[] domain, java.util.Random rand) {
 		int[] s = new int[domain.length];
 		for (int i = 0; i < domain.length; ++i) {
@@ -15,28 +26,29 @@ public class Candidate implements Comparable<Candidate>, strategies.StrategySolu
 		}
 		return s;
 	}
-	
-	public Candidate (int[] domain, java.util.Random rand, robotrain.GenericFitness<int[]> fc) {
+
+	public Candidate(int[] domain, java.util.Random rand,
+			robotrain.GenericFitness<int[]> fc) {
 		this.solution = Candidate.random(domain, rand);
 		this.fitness = fc.calculateFitness(this.solution);
 		if (this.solution.length > 4) {
 			System.err.println("Wtf you doin? rand candidate");
 		}
 	}
-	
-	public Candidate (int[] solution, robotrain.GenericFitness<int[]> fc) {
+
+	public Candidate(int[] solution, robotrain.GenericFitness<int[]> fc) {
 		this.fitness = fc.calculateFitness(solution);
 		this.solution = solution.clone();
 		if (this.solution.length > 4) {
 			System.err.println("Wtf you doin? new int[]");
 		}
 	}
-	
-	private Candidate (int[] solution, double fitness) {
+
+	private Candidate(int[] solution, double fitness) {
 		this.solution = solution.clone();
-		this.fitness = fitness;		
+		this.fitness = fitness;
 	}
-	
+
 	@Override
 	public double getFitness() {
 		// Gets the fitness of a candidate
@@ -48,22 +60,28 @@ public class Candidate implements Comparable<Candidate>, strategies.StrategySolu
 		// Gets the solution in the candidate
 		return solution.clone();
 	}
-	
 
 	@Override
 	public int compareTo(Candidate other) {
 		// Compares two candidates
-		return -1*Double.compare(this.fitness, other.fitness);
+		return -1 * Double.compare(this.fitness, other.fitness);
 	}
-	
+
 	public Candidate clone() {
 		return new Candidate(this.solution, this.fitness);
 	}
 
+	/**
+	 * Does a crossover
+	 * 
+	 * @param b
+	 * @param r
+	 * @return
+	 */
 	int[] breed(Candidate b, java.util.Random r) {
 		Candidate a = this;
 		int[] s = new int[this.solution.length];
-		final int pos = r.nextInt(this.solution.length);		
+		final int pos = r.nextInt(this.solution.length);
 		for (int i = 0; i < pos; ++i) {
 			s[i] = a.solution[i];
 		}
@@ -71,13 +89,23 @@ public class Candidate implements Comparable<Candidate>, strategies.StrategySolu
 			if (i == 4) {
 				System.err.println("b.solution.length: " + b.solution.length);
 				System.err.println("pos: " + pos);
-				System.err.println("pos < b.solution.length: " + (pos < b.solution.length));
+				System.err.println("pos < b.solution.length: "
+						+ (pos < b.solution.length));
 			}
 			s[i] = b.solution[i];
 		}
 		return s;
 	}
-	
+
+	/**
+	 * Standard GA mutation
+	 * 
+	 * @param domain
+	 * @param r
+	 * @param lambda
+	 *            Expected mutation count
+	 * @return
+	 */
 	int[] mutate(int[] domain, java.util.Random r, double lambda) {
 		double L = Math.exp(lambda);
 		int k = 0;
@@ -85,9 +113,9 @@ public class Candidate implements Comparable<Candidate>, strategies.StrategySolu
 		do {
 			k = k + 1;
 			p *= r.nextDouble();
-		} while ( p > L );
+		} while (p > L);
 		int[] ret = this.solution.clone();
-		for (int i = 1; i < k; ++i) { //Poisson value is actually k - 1
+		for (int i = 1; i < k; ++i) { // Poisson value is actually k - 1
 			int j = r.nextInt(this.solution.length);
 			ret[j] = r.nextInt(domain[j]);
 		}

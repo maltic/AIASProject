@@ -5,7 +5,7 @@ import robotrain.*;
 
 public class Main {
 	public static void main(String[] args) {
-		
+		//RobocodeLearning.learnWithNeuralNet("sample.RamFire");
 		System.err.println(robotrain.BattleRunner.RobocodePath);
 		//String strategy = "GA";
 		String strategy = "ACO";

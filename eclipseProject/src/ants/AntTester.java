@@ -2,6 +2,12 @@ package ants;
 
 import robotrain.GenericFitness;
 
+/**
+ * A testing fitness object. Gives fitness for odd numbers.
+ * 
+ * @author Max
+ * 
+ */
 class OddFit implements GenericFitness<int[]> {
 
 	@Override
@@ -15,6 +21,12 @@ class OddFit implements GenericFitness<int[]> {
 
 }
 
+/**
+ * A little class I used to test if ACO was working
+ * 
+ * @author Max
+ * 
+ */
 public class AntTester {
 
 	public static void test() {

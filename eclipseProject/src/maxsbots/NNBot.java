@@ -10,15 +10,32 @@ import robocode.AdvancedRobot;
 import robocode.ScannedRobotEvent;
 import robotrain.BattleRunner;
 
+/**
+ * Neural network controlled robot. Uses a NN to control all actions of the bot,
+ * and which takes as input all the bots knowledge.
+ * 
+ * @author Max
+ * 
+ */
 public class NNBot extends AdvancedRobot {
 
+	/**
+	 * The controller
+	 */
 	private NeuralNetwork nn;
 
+	/**
+	 * Data collected when the enemy was last scanned
+	 */
 	private double scannedHeading, scannedVelocity, scannedEnergy, scannedX,
 			scannedY;
-	private int scanAge;
+	/**
+	 * Age (in turns) of the last scan. Start off as 'infinitely' large
+	 */
+	private int scanAge = 9999;
 
 	public void run() {
+		// load the neural network from file
 		try {
 			FileReader fr = new FileReader(BattleRunner.RobocodePath
 					+ "/robots/maxsbots/roboSpec");
@@ -37,6 +54,7 @@ public class NNBot extends AdvancedRobot {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		// config
 		double width = getBattleFieldWidth(), height = getBattleFieldHeight();
 		setAdjustGunForRobotTurn(true);
 		setAdjustRadarForGunTurn(true);
@@ -62,10 +80,12 @@ public class NNBot extends AdvancedRobot {
 			if (out[4] > 0.1)
 				setFire(out[4]);
 			execute();
+			scanAge++;
 		}
 	}
 
 	public void onScannedRobot(ScannedRobotEvent e) {
+		// save the scanned information
 		scannedHeading = e.getHeading();
 		double scannedDistance = e.getDistance();
 		scannedVelocity = e.getVelocity();

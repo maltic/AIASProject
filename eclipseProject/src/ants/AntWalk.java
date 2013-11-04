@@ -2,8 +2,21 @@ package ants;
 
 import robotrain.GenericFitness;
 
-public class AntWalk implements Comparable<AntWalk>, strategies.StrategySolution {
+/**
+ * Represents a single walk by an ant through the solution space
+ * 
+ * @author Max
+ * 
+ */
+public class AntWalk implements Comparable<AntWalk>,
+		strategies.StrategySolution {
+	/**
+	 * The solution found
+	 */
 	public int[] solution;
+	/**
+	 * The solutions fitness
+	 */
 	public double fitness;
 
 	public AntWalk(int[] solution, GenericFitness<int[]> fc) {
@@ -20,7 +33,12 @@ public class AntWalk implements Comparable<AntWalk>, strategies.StrategySolution
 		else
 			return -1;
 	}
-	
-	public int[] getSolution() { return this.solution.clone(); }
-	public double getFitness() { return this.fitness; }
+
+	public int[] getSolution() {
+		return this.solution.clone();
+	}
+
+	public double getFitness() {
+		return this.fitness;
+	}
 }

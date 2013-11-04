@@ -2,26 +2,28 @@ package ga;
 
 import java.util.Arrays;
 
-
-
-
+/**
+ * An implementation of a genetic algorithm.
+ * 
+ * @author Mitch
+ * 
+ */
 public class GAOptimizer implements strategies.StrategyOptimizer {
 
-	
-		
 	private int populationSize;
 	private int[] domain;
 	private robotrain.GenericFitness<int[]> fitCalc;
 	private java.util.Random r;
 	private GAOptimizerSettings settings;
-	
+
 	private Candidate[] pool;
-	
+
 	private double average;
 	private double best;
 	private Candidate bestCandidate;
-	
-	public GAOptimizer (GAOptimizerSettings settings, int[] domain, robotrain.GenericFitness<int[]> fc) {
+
+	public GAOptimizer(GAOptimizerSettings settings, int[] domain,
+			robotrain.GenericFitness<int[]> fc) {
 		this.populationSize = settings.size;
 		this.domain = domain;
 		System.err.print("this.domain.length: " + domain.length + "[");
@@ -36,11 +38,11 @@ public class GAOptimizer implements strategies.StrategyOptimizer {
 		this.pool = null;
 		this.settings = settings;
 	}
-	
+
 	private Candidate getBestInPool() {
 		return this.pool[0].clone();
 	}
-	
+
 	@Override
 	public Candidate train(int steps) {
 		// Repeat the GA process for steps.
@@ -52,14 +54,15 @@ public class GAOptimizer implements strategies.StrategyOptimizer {
 		for (int i = 1; i <= steps; ++i) {
 			evolve();
 			Candidate bestC = this.getBestInPool();
-			System.out.println(i + " : " + bestC.fitness + " , " + getAverage());
+			System.out
+					.println(i + " : " + bestC.fitness + " , " + getAverage());
 			System.out.print("The best solution was: <");
 			for (int j = 0; j < bestC.solution.length; ++j)
 				System.out.print(bestC.solution[j]
 						+ ((j == bestC.solution.length - 1) ? "" : ", "));
 			System.out.println("> with fitness: " + bestC.getFitness());
 		}
-		System.out.println("---------Ending GA-----------");		
+		System.out.println("---------Ending GA-----------");
 		return this.bestCandidate.clone();
 	}
 
@@ -74,23 +77,26 @@ public class GAOptimizer implements strategies.StrategyOptimizer {
 		double avg = 0.0;
 		for (int j = 0; j < this.pool.length; ++j)
 			avg += this.pool[j].fitness;
-		avg /= this.pool.length;			
+		avg /= this.pool.length;
 		return avg;
 	}
+
 	private void evolve() {
-		if (this.pool == null) { //Create new pool from scratch
+		if (this.pool == null) { // Create new pool from scratch
 			this.pool = new Candidate[this.populationSize];
 			for (int i = 0; i < this.populationSize; ++i) {
 				this.pool[i] = new Candidate(this.domain, r, fitCalc);
 			}
-		} else { //Evolve current pool
+		} else { // Evolve current pool
 			Candidate[] newpool = new Candidate[settings.size];
 			java.util.HashSet<int[]> members = new java.util.HashSet<>();
-			int i = (int)java.lang.Math.floor(settings.size*settings.elitism);	
+			int i = (int) java.lang.Math
+					.floor(settings.size * settings.elitism);
 			int trials = 0;
-			for (int j = 0; j < i; ++j) { //elitism
+			for (int j = 0; j < i; ++j) { // elitism
 				newpool[j] = this.pool[j];
-				//System.err.println("newpool[j].fitness: " + newpool[j].getFitness());
+				// System.err.println("newpool[j].fitness: " +
+				// newpool[j].getFitness());
 			}
 			while (i < settings.size && trials < settings.maxevolvetrials) {
 				++trials;
@@ -110,34 +116,37 @@ public class GAOptimizer implements strategies.StrategyOptimizer {
 						}
 					}
 				} else {
-					int[] c = this.select().mutate(this.domain, r, settings.mutationLambda);
+					int[] c = this.select().mutate(this.domain, r,
+							settings.mutationLambda);
 					if (!members.contains(c)) {
 						members.add(c);
 						newpool[i++] = new Candidate(c, fitCalc);
 					}
 				}
 			}
-			if (trials == settings.maxevolvetrials) while (i < newpool.length) {
-				 newpool[i++] = new Candidate(this.select().mutate(this.domain, r, settings.mutationLambda), fitCalc);
-			}
+			if (trials == settings.maxevolvetrials)
+				while (i < newpool.length) {
+					newpool[i++] = new Candidate(this.select().mutate(
+							this.domain, r, settings.mutationLambda), fitCalc);
+				}
 			this.pool = newpool;
 		}
-		
+
 		Arrays.sort(this.pool);
 		if (this.getBestInPool().getFitness() > this.best) {
 			this.best = this.getBestInPool().getFitness();
 			this.bestCandidate = this.getBestInPool();
 		}
-		this.average = getAverage();		
+		this.average = getAverage();
 	}
-	
+
 	private Candidate select() {
 		final int t = settings.tourney;
 		Candidate winner = null;
 		for (int i = 0; i < t; ++i) {
-			Candidate c = this.pool[r.nextInt(this.pool.length)]; 
+			Candidate c = this.pool[r.nextInt(this.pool.length)];
 			if (winner == null) {
-				winner = c; 
+				winner = c;
 			} else {
 				if (winner.getFitness() < c.getFitness()) {
 					winner = c;

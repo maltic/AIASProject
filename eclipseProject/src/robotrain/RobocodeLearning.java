@@ -15,6 +15,12 @@ import neuralnet.evo.*;
  * 
  */
 public class RobocodeLearning {
+	
+	/**
+	 * Learn how to win 1v1 with ACO
+	 * @param enemy Robocode enemy defintion
+	 * @return
+	 */
 	public static AntWalk learnWithACO(String enemy) {
 		AntOptimizer ao = new AntOptimizer(32, new int[] {
 				StrategyFactory.MovementStrategies,
