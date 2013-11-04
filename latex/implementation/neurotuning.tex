@@ -1,0 +1,9 @@
+Several activation functions in the neural network were investigated. These include a simple threshold function; \texttt{tanh}, and the logistic \texttt{sigmoid} function. The threshold function was not ideal as it prevented Neuroevolution from benefitting from small changes in weights;-- there was no gradient of error. There was no significant difference in fitness between using the \texttt{tanh} and \texttt{sigmoid} function; but the implementation of \texttt{tanh} in Java was mysteriously very slow and as such a logistic \texttt{sigmoid} ANN was used. A post on \texttt{StackOverflow} \cite{slowtanh} would seem to indicate this is expected and that Java's math library stressed correctness over performance.
+
+A pitfall of our Neuroevolution style is it suffers from competing conventions. This is when a population contains two or more different encodings for the neural network which produce similar outputs. This confounds the genetic algorithm somewhat because crossover will generally produce offspring with low fitness \cite{mattiussi2011beyond}.
+
+In addition to this, Neuroevolution like back-propagation may become trapped in local minima, particularly if there is not enough variation in its starting population. It may also become trapped if suboptimal genomes initially have quickly increasing fitness; but plateau soon after.
+
+To address this problem we use isolated populations in the genetic algorithm. For every generation two randomly selected populations trade their worst fitness individual for a copy of the other population's best. This promotes diversity; but ensures good innovations eventually spread throughout the individual populations. A similar result might be achieved using niching; however our approach was easier to implement.
+
+
