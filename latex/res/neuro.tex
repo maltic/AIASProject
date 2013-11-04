@@ -1,0 +1,22 @@
+\subsubsection{Rate of Convergence}
+Pure Neuroevolution was never able to learn how to beat any of the sample enemies provided as part of the Robocode. It never came close, even after hours of learning. Though not heartening, this was after all not the aim of our investigation. The important question for us was whether or not Neuroevolution was able to learn and thereby improve its performance. The answer is a tentative yes.
+
+Figures \ref{neuro:v:tracker} and \ref{neuro:v:ramfire} show while the fitness of our implementation of Neuroevolution; it does seem to learn at a slow but noticeable rate. It does; however, tend to slow down after a large number of generations. 
+
+The individual of best fitness from the previous generation was always kept into the next generation leading to the plateaus seen in Figures \ref{neuro:v:tracker} and \ref{neuro:v:ramfire}. This is because the fitnesses of these individuals were not recalculated every generation to avoid longer training times. Every genome was immutable so it was assumed the fitness is the same.
+
+\subsubsection{Observed Behaviours}
+During the first generation, most strategies looked like a random walk. Sometimes, however, a Robot would spin its radar, gun, or iteslf wildly. This is likely because part of the neural network was weighted such taht one output was always saturated which is a reasonable scenario. In later generations the best strategies still looked more or less random; however, they employed simple heuristics.
+
+An example of a simple heuristic used was shooting in the general direction of the enemy more likely than not. Other examples include a vague strafing movement to avoid the enemy's bullets. They were also less likely to ram into the walls at full speed.
+
+It appears that learning on Robocode on such a gross level was not feasible. Perhaps a larger neural network with more time and a larger population might be able to learn better behaviours.
+
+
+\FigNeurovTracker
+\FigNeurovRamFire
+
+\subsubsection{Performance}
+\subsubsection{Amount of Diversity}
+
+\subsection{Conclusion}
