@@ -1,4 +1,5 @@
-The genetic algorithm uses the same candidate solutions as the ants in the ACO implementation. 
+The genetic algorithm uses the same candidate solutions as the ants in the ACO implementation. It implements the abstracted \texttt{StrategyOptimizer} interface.
+
 If strategies are being combined, and each strategy belongs to a particular class then each strategy in each class can be assigned arbitrarily a unique integer identifier. These identifiers become the genes. Each gene is an integer describing which member within a particular class of strategies to use.
 
 A collection of each of the class identifiers or integers describes is the genotype. In this application, a genotype is an ordered quadruple of integers. The first integer describes the movement strategy, the second describes the fire strategy, the third describes the scan strategy, and the fourth describes the gun movement strategy.

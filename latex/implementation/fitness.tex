@@ -1,0 +1,20 @@
+\subsubsection{Strategy Learning}
+
+Fitness calculations were performed for each candidate \texttt{StrategySolution} by writing the selected strategies to file. A generalised robot class \texttt{ScriptBot} was created which reads the strategies to file, creates instances of the selected strategies using a \texttt{StrategyFactory} class, and executes them when required by the Robocode enviroment.
+
+\newcommand{\BattleRunner}{\texttt{BattleRunner}}
+
+Each battle is handled by an instance of an implementation of the Robocode \\ \texttt{BattleAdaptor} called \BattleRunner. Only one instance of \BattleRunner is used throughout all the fitness calculations for every generation. Each instance creates an instance of the \texttt{RobocodeEngine}. Initializing the \texttt{RobocodeEngine} takes time; and therefore by only constructing one instance time is saved.
+
+Fitnesses were calculated sparingly. Elite members carried to the next generations did not have their fitnesses calculated. Further, in the GA, mutant genotypes and crossed-over offspring only have their fitnesses calculated if they are not the clone of a member already in the next population.
+
+In order to tune the best found strategy, a different class \texttt{NNScriptBot} was used which not only loads the strategies akin to \texttt{ScriptBot}; but also loads a neural network specification which describes the topology of the neural network and the weights of each of the corresponding edges.
+
+The \BattleRunner class when executing a battle passes in a string representing the class name of the enemy, for example ``\texttt{sample.Tracker}'' and the string representing the corresponding script bot, ``\texttt{sample.ScriptBot}''.
+
+\subsubsection{Robot Training using Neuroevolution}
+
+The fitnesses of robots trained using Neuroevolution were computed in a similar manner to \texttt{NNScriptBot}; using a class called \texttt{NNBot}. A specification was loaded and executed. 
+
+\subsubsection{Issues Faced using the Robocode API}
+Unfortunately the Robocode API cannot accept instances of \texttt{Robot}s in a ``\texttt{runBattle}'' function. The File input and output described above was used as a work around to specify learned behaviours. This disk I/O turned out to not be such a bottleneck for learning; but it did make the fitness calculations more awkward to compute.  As such they were abstracted by a \texttt{GeneralFitness} interface which takes in a candidate and outputs the score ratio.
