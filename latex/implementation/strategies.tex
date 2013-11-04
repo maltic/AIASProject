@@ -1,9 +1,11 @@
 
 
 \subsubsection{Abstraction}
-A level of abstraction was implemented between the ACO or GA method of finding an optimal combination and the evaluation of the combination. This is because the genome of the ants and the genotypes in the GA are the same quadruples of strategies. This allowed for more code to be reused. Both GA and ACO produce candidate solutions which are abstracted using an interface called \texttt{StrategySolution}, and the GA and ACO methods implement a \texttt{StrategyOptimizer} interface.
+A level of abstraction was implemented between the ACO and GA methods of finding an optimal combination, and the evaluation of fitness of the combination. This is because the genome of the ants and the genotypes in the GA are the same quadruples of strategies. This allowed for more code to be reused. Both GA and ACO produce candidate solutions which are abstracted using an interface called \texttt{StrategySolution}, and the GA and ACO methods implement a \texttt{StrategyOptimizer} interface.
 
-The robot which implements each solution for the purposes of calculating fitness only uses the \texttt{StrategySolution} interface which supports a method for returning the solution by a method call \texttt{getSolution()} which returns an integer array describing the selected strategies. This array contains exactly four values. Each value identifies a specific strategy. First first number in the array defines a movement strategy, the second defines a firing strategy, the third defines a radar movement strategy, and the last defines a gun movement strategy. Every strategy was simply a pre-programmed function which took as input the robots current knowledge and returned the next set of actions the robot should perform. The solution space contained all possible combinations of strategies for each of the four aforementioned classes. The solution classes were programmed to be completely modular; movement strategies only controlled the robot's movement, radar movement strategies only controlled the radars movement, et cetera. Clearly this is the same process as that used by Hong and Cho \cite{emergentbehaviours}. We have made some modifications to their method. Firstly, we allowed a strategy to access all the data with which the robot has access. We also removed the target selection strategy as we are only focussing on one versus one battles. We also removed the `avoid' strategies. A summary of the strategies we implemented can be found in Table \ref{table:strategies}.
+The robot which implements each solution for the purposes of calculating fitness only uses the \texttt{StrategySolution} interface which supports a method for returning the solution by a method call \texttt{getSolution()} which returns an integer array describing the selected strategies. This array contains exactly four values. Each value identifies a specific strategy. First first number in the array defines a movement strategy, the second defines a firing strategy, the third defines a radar movement strategy, and the last defines a gun movement strategy. Every strategy was simply a pre-programmed function which took as input the robots current knowledge and returned the next set of actions the robot should perform. The solution space contained all possible combinations of strategies for each of the four aforementioned classes. The solution classes were programmed to be completely modular; movement strategies only controlled the robot's movement, radar movement strategies only controlled the radars movement, et cetera. Clearly this is the same process as that used by Hong and Cho \cite{emergentbehaviours}. 
+
+We have, however, made some modifications to their method. Firstly, we allowed a strategy to access all the data the robot is allowed to access. We also removed the target selection strategy as we are only focussing on one versus one battles. We also removed the `avoid' strategies. A summary of the strategies we implemented can be found in Table \ref{table:strategies}.
 
 \begin{table*}
 \centering
@@ -16,7 +18,7 @@ Firing & ID 0: WeakFire, ID 1 StrongFire, \\ &  ID 2: CloseFire, ID 3: FireIfSlo
 \hline
 Scanning & ID 0: MatchSlowRobotScan (matches the robot's heading, slowly),\\ &  ID 1: FastSpinScan, \\ & ID 2: SlowPredictiveScan (tries to get a scan lock, slow moving), \\ &  ID 3: SlowSpinScan \\
 \hline
-Gun Movement & ID 0 SlowFollowScannerGun, ID 1: FastFollowScannerGun, \\ & 
+Gun Movement & ID 0: SlowFollowScannerGun, ID 1: FastFollowScannerGun, \\ & 
  ID 2: SlowSpinGun, ID 3: FastSpinGun, \\ &  ID 4: FollowEnemyGun \\
 \hline
 \end{tabular}
@@ -24,4 +26,17 @@ Gun Movement & ID 0 SlowFollowScannerGun, ID 1: FastFollowScannerGun, \\ &
 \label{table:strategies}
 \end{table*}
 
+\subsubsection{Measuring the Fitness of a Strategy}
+
+The fitness of a combination of strategies is measured by performing 40 rounds in Robocode with the predefined enemy robot and observing the ratio of the robot's score to the enemy's score.
+
+\begin{equation}
+\label{eqn:fitness}
+\text{Fitness}\left({phenotype}|{enemy}\right) = 
+\frac{S(p)}{S(p) + S(e)}
+\end{equation}
+
+The score ratio is an excellent fitness measure because it indicates how the robot performs against the enemy and how much it `wins' in proportion to the enemy. It is better than just using the total score because even though the robot may win, it could have received a low score because it won quickly or won by dodging the enemy's bullets and firing none of its own. Using the score ratio abstracted these fluctuations. 
+
+In addition, using 40 rounds removes the variation caused by random starting locations. Some locations may give the robot an unfair starting advantage. Therefore a large number of rounds is used to accurately compute a good fitness.
 

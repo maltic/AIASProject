@@ -2,13 +2,13 @@
 The aim of this experiment is to test the Neuroevolution implementation and to determine if it is appropriate for learning a general Robocode strategy from scratch.
 
 \subsubsection{Experimental Hypothesis}
-It is hypothesised using a pure holistic neuroevolution approach to learning a general strategy for a Robocode robot is achieveable.
+It is hypothesised using a pure holistic Neuroevolution approach to learning a general strategy for a Robocode robot is achievable.
 
 \subsubsection{Methodology and Rationale}
 
 \begin{description}
 \item Neural Network Topology \hfill \\
-Neuroevolution requires a specified topology of the network. Preliminary experimentation revealed the toplogy defined by the vector $<13, 15, 7, 5>$ was effective for learning without taking too long to learn. There are a total of $13 \times 15 + 15 \times 7 + 7 \times 5 = 335$ weights. It is expected such a topology allows for the inputs to be expanded upon and then combined slowly to the outputs.
+Neuroevolution requires a specified topology of the network. Preliminary experimentation revealed the topology defined by the vector $<13, 15, 7, 5>$ was effective for learning without taking too long to learn. There are a total of $13 \times 15 + 15 \times 7 + 7 \times 5 = 335$ weights. It is expected such a topology allows for the inputs to be expanded upon and then combined slowly to the outputs.
 
 \item Number of Populations and Population Size \hfill \\
 Neuroevolution was done using 3 populations containing 32 individuals each. Evaluating the fitness is the most significant time expenditure and therefore the total number of individuals is kept fairly small. 
@@ -17,12 +17,11 @@ Neuroevolution was done using 3 populations containing 32 individuals each. Eval
 The algorithm was run overnight because it ran so slowly, and the presented results show fitness at every tenth generation to help remove noise.
 
 \item Fitness \hfill \\
-Unless otherwise stated, the fitness function used was the same as \ref{eqn:fitness}. The score is the total score after 40 rounds. The score ratio is an excellent fitness measure because it indicates how the robot performs against the enemy and how much it `wins' in proportion to the enemy. It is better than just using the total score because even though the robot may win, it could have gotten a low score because it won quickly or won by dodging the enemy's bullets and firing none of its own. Using the score ratio abstracted these fluctuations. 
+Unless otherwise stated, the fitness function used was the same as Equation \ref{eqn:fitness}. The score is the total score after 40 rounds. 
 
-In addition, using 40 rounds removes the variation caused by random starting locations. Some locations may give the robot an unfair starting advantage. Therefore a large number of rounds is used to accurately compute a good fitness.
 
 \item Neuroevolution Genetic Algorithm Parameters \hfill \\
-The parameters set for the GA used for training were found by trial and error. A truncation factor of 50\% was used. Anything less tended to mean that the algorithm converged on suboptimal solutions too quickly. We had the crossover rate was set to 35\% and the mutation rate was set to 60\%, and therefore a 5\% chance of adding a new random invididual in place of breeding an onld one.
+The parameters set for the GA used for training were found by trial and error. A truncation factor of 50\% was used. Anything less tended to mean that the algorithm converged on suboptimal solutions too quickly. We had the crossover rate was set to 35\% and the mutation rate was set to 60\%, and therefore a 5\% chance of adding a new random individual in place of breeding an old one.
 
 The crossover weight was attempted to be set higher; however this lead to much slower rates of convergence. Setting it too low also presented the same problem. This is likely due to good innovations -- which can be shared between different populations -- were never able to mix with other good but incomplete solutions.
 

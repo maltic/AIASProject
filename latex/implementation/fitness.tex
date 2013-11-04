@@ -1,10 +1,10 @@
 \subsubsection{Strategy Learning}
 
-Fitness calculations were performed for each candidate \texttt{StrategySolution} by writing the selected strategies to file. A generalised robot class \texttt{ScriptBot} was created which reads the strategies to file, creates instances of the selected strategies using a \texttt{StrategyFactory} class, and executes them when required by the Robocode enviroment.
+Fitness calculations were performed for each candidate \texttt{StrategySolution} by writing the selected strategies to file. A generalised robot class \texttt{ScriptBot} was created which reads the strategies to file, creates instances of the selected strategies using a \texttt{StrategyFactory} class, and executes them when required by the Robocode environment.
 
-\newcommand{\BattleRunner}{\texttt{BattleRunner}}
+\newcommand{\BattleRunner}{\texttt{BattleRunner}\,}
 
-Each battle is handled by an instance of an implementation of the Robocode \\ \texttt{BattleAdaptor} called \BattleRunner. Only one instance of \BattleRunner is used throughout all the fitness calculations for every generation. Each instance creates an instance of the \texttt{RobocodeEngine}. Initializing the \texttt{RobocodeEngine} takes time; and therefore by only constructing one instance time is saved.
+Each battle is handled by an instance of an implementation of the Robocode \\ \texttt{BattleAdaptor} called \BattleRunner. Only one instance of \BattleRunner  is used throughout all the fitness calculations for every generation. Each instance creates an instance of the \texttt{RobocodeEngine}. Initializing the \texttt{RobocodeEngine} takes time; and therefore by only constructing one instance time is saved.
 
 Fitnesses were calculated sparingly. Elite members carried to the next generations did not have their fitnesses calculated. Further, in the GA, mutant genotypes and crossed-over offspring only have their fitnesses calculated if they are not the clone of a member already in the next population.
 

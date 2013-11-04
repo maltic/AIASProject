@@ -5,7 +5,7 @@ Initially, an ant will compute how much interest it has in a node. This is descr
 \text{Interest} = r \times m + p
 \end{equation}
 
-\noindent where the variable $r$ is sampled uniformly from $[0, 1)$. The variable $m$ is a randomness factor chosen by the programmer. In our implementation this was set to 1.0 by default. Finally, $p$ is defined as the amount of pheromone on a node. The Max-Min Ant system constrains the value pf $p$ to $[0, 1]$. 
+\noindent where the variable $r$ is sampled uniformly from $[0, 1)$ and the variable $m$ is a randomness factor chosen by the programmer. In our implementation this was set to 1.0 by default. Finally, $p$ is defined as the amount of pheromone on a node. The Max-Min Ant system constrains the value of $p$ to $[0, 2]$, and so does our algorithm \cite{stutzle2000max}.
 
 The ant then walks to the node with the maximum interest. It continues to do this until it has reached maximum depth. After all ants have walked through the graph, the amount of pheromone on each node of the graph decreases by a small amount (chosen to be 0.05 in our implementation).
 
