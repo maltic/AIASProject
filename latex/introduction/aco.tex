@@ -9,10 +9,7 @@ ACO is a metaheuristic inspired on the foraging behaviour of Argentine ants. Our
 
 The ant then walks to the node with the maximum interest. It continues to do this until it has reached maximum depth. After all ants have walked through the graph, the amount of pheromone on each node of the graph decreases by a small amount (chosen to be 0.05 in our implementation).
 
-The fitness is calculated for all of the ``ant walks'' and the fittest ant is allowed to lay down some new pheromone. It does this by putting down $Q/L$ pheromone on each node where $Q$ is the total amount of pheromone an ant carries (chosen to be 1.0) and $L$ is the number of nodes in the solution. Our `solution graph' was very simple and is inspired by the work in \cite{emergentbehaviours}. A solution was represented by a vector of four numbers $(a, b, c, d)$. Each of these numbers is an identifier for a pre-defined strategy. Each identifier represents a strategy for movement, firing, scanning/radar and a gun movement strategy respectively.
-
-
-A summary of the strategies we implemented can be found in Table \ref{table:strategies}.
+The fitness is calculated for all of the ``ant walks'' and the fittest ant is allowed to lay down some new pheromone. It does this by putting down $Q/L$ pheromone on each node where $Q$ is the total amount of pheromone an ant carries (chosen to be 1.0) and $L$ is the number of nodes in the solution. Our `solution graph' was very simple and is inspired by the work in \cite{emergentbehaviours}. A solution was represented by a vector of four numbers $(a, b, c, d)$. Each of these numbers is an identifier for a pre-defined strategy. Each identifier represents a strategy for movement, firing, scanning/radar and a gun movement strategy respectively. A summary of the strategies we implemented can be found in Table \ref{table:strategies}.
 
 \begin{table*}
 \centering

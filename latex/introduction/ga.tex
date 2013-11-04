@@ -12,17 +12,26 @@ A collection of each of the class identifiers or integers describes is the genot
 A phenotype is therefore the actual robot which uses each of the strategies defined in the genotype. The fitness of a phenotype is measured by performing 40 rounds in Robocode with the predefined enemy robot and observing the ratio of the phenotype's score to the enemy's score.
 
 \begin{equation}
+\label{eqn:fitness}
 \text{Fitness}\left({phenotype}|{enemy}\right) = 
 \frac{S(p)}{S(p) + S(e)}
 \end{equation}
 
-At each iteration of the algorithm in which the population is evolved genetic operators are applied. The genetic operators used are Tournament Selection; Elitism; \\ Crossover;  and Mutation. 
+At each iteration of the algorithm in which the population is evolved genetic operators are applied. The genetic operators used are:
+\begin{itemize}
+\item Selection;
+\item Elitism;
+\item Crossover; and 
+\item Mutation.
+\end{itemize}
 
 Elitism is used in order to increase the rate at which the algorithm converges. It works by taking a fixed percentage of the population which are the fittest members into the next generation. This also ensures that the fittest solution found at any iteration is in the final population. It improves the rate of covergence because the elite members are more likely to be chosen in future iterations for crossover and mutation; and so the genetic information from the elite members always survives and can spread to new members. Ideally, the genes which are transferred to new members are responsible for their high fitness and so new members also have similar fitness as the elite members; thus converging quickly.
 
-Tournament Selection is a simple method to selecting members for the crossover and mutation operators. The version used here is to select a small sample of members uniformly with replacement (3 members) and take the fittest. Selection methods do not produce new members but they are used to select members for crossover and mutation. A genetic algorithm exploits the current population by tending to select members which already have a high fitness. Therefore selection operators tend to select fitter members. It is also important to increase diversity and exploration. This is done by probabilistically selecting members such that fitter members are more likely to be selected, but weaker members also have a chance to be selected. Tournament selection allows this because the fittest member selected for the small tournament may not be the same as the fittest member of the population. Small tournament sizes favour exploration; increasing divesity.
+Selection is a method for selecting members for the crossover and mutation operators. Two types are investigated, Tournament and Truncation selection.
 
-Another selection operator used was Truncation selection. Truncation selection takes a certain percentage (e.g. 40\%) of the fittest members of the population as potential parents. Members are selected uniformly with replacement from the truncated population for both mutation and crossover. The uniform selection allows the weaker members of the truncated population to be selected increasing diversity; but the truncated population eliminiates potential very bad choices increasing the rate of convergence.
+The version of tournament selection used here is to select a small sample of members uniformly with replacement (3 members) and take the fittest. Selection methods do not produce new members but they are used to select members for crossover and mutation. A genetic algorithm exploits the current population by tending to select members which already have a high fitness. Therefore selection operators tend to select fitter members. It is also important to increase diversity and exploration. This is done by probabilistically selecting members such that fitter members are more likely to be selected, but weaker members also have a chance to be selected. Tournament selection allows this because the fittest member selected for the small tournament may not be the same as the fittest member of the population. Small tournament sizes favour exploration; increasing divesity.
+
+The other selection operator used was Truncation selection. Truncation selection takes a certain percentage (e.g. 40\%) of the fittest members of the population as potential parents. Members are selected uniformly with replacement from the truncated population for both mutation and crossover. The uniform selection allows the weaker members of the truncated population to be selected increasing diversity; but the truncated population eliminiates potential very bad choices increasing the rate of convergence.
 
 Mutation is an operator which allows for new genetic information which may not already exist within the population to be introduced into the population. Mutation works by randomly changing a collection of genes within a genotype. There are different types of mutation, for example reselection of a gene (uniformly or by another probability distribution); scaling a gene by some amount especially if it is a number; or a random walk in a graph that has been imposed on the potential genes. As such new genes can be selected which may improve the current fitness. Mutation is required because it allows genetic algorithms to escape local optima. If the algorithm converges prematurely because of a lack of genetic diversity, then mutation can increase the amount of genetic diversity allowing the genetic algorithm to further explore the problem domain.
 

@@ -1,0 +1,30 @@
+\subsubsection{Aim}
+The aim of this experiment is to investigate the difference in performance between the use of Ant Colony Optimization and Genetic Algorithms for the purposes of optimizing the fitness of a combination of strategies from a finite set of predefined Robocode stratgies.
+
+\subsubsection{Experimental Hypothesis}
+It is hypothesised both methods will be able to  learn winning strategies against fixed enemy robots.
+
+It is also expected the genetic algorithm will achieve better fitnesses than the ant colony optimization because it is well understood and has been applied before to similar solution spaces.
+
+It is also expected that neurotuning will increase the performance of the robots learned by the ACO or the GA.
+
+\subsubsection{Methodology and Rationale}
+
+\begin{description}
+\item Population Size for ACO \hfill \\
+In all the tests, a population of 32 ants run for 25 generations was used. These numbers seem small but preliminary investigations showed it is all that is required for finding excellent solutions. This finding is echoed in our results.
+
+\item Population Size for GA \hfill \\
+In order to compare the GA against the ACO algorithm, 32 genotypes were used in a single population and the GA was also run for 25 generations. It is hoped this allows for a fair comparison between the two methods.
+
+\item Tuning the Fire Strategy using Neuroevolution \hfill \\
+When tuning the firing function, the weights of the neural network were configured to use 2 populations with 16 genomes per population for 25 generations. The best found strategy from both GA and ACO were used to control the robot; albeit with the evolved neural net determining its `to fire' function.
+
+Again the results showed this was all that was required to get excellent results.
+
+\item Enemy Robots \hfill \\
+The results shown use two sample robots from the Robocode library; RamFire and Tracker. These robots were chosen because they are two of the hardest robots to beat, and if the learned strategies are able to beat them then it is enough to illustrate the efficacy of our techniques.
+
+\end{description}
+
+
