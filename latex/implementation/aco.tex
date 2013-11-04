@@ -1,0 +1,12 @@
+Initially, an ant will compute how much interest it has in a node. This is described in Equation \ref{eqn:aco:initialfitness}.
+
+\begin{equation}
+\label{eqn:aco:initialfitness}
+\text{Interest} = r \times m + p
+\end{equation}
+
+\noindent where the variable $r$ is sampled uniformly from $[0, 1)$. The variable $m$ is a randomness factor chosen by the programmer. In our implementation this was set to 1.0 by default. Finally, $p$ is defined as the amount of pheromone on a node. The Max-Min Ant system constrains the value pf $p$ to $[0, 1]$. 
+
+The ant then walks to the node with the maximum interest. It continues to do this until it has reached maximum depth. After all ants have walked through the graph, the amount of pheromone on each node of the graph decreases by a small amount (chosen to be 0.05 in our implementation).
+
+The fitness is calculated for all of the ``ant walks'' and the fittest ant is allowed to lay down some new pheromone. It does this by putting down $Q/L$ pheromone on each node where $Q$ is the total amount of pheromone an ant carries (chosen to be 1.0) and $L$ is the number of nodes in the solution.
