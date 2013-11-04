@@ -1,0 +1,13 @@
+The goal we selected for this project was to create a system which could learn to win one versus one battles in Robocode. This is an ambitious, and rather holistic goal. We did not want to learn only a small or restricted part of the Robocode game, instead we liked the idea of being able to have a robot learn (from the ground up) how to win against an opponent, or at least how to lose in style.
+
+The first approach that we implemented was a flavour of Neuroevolution. This required implementing both a neural network, and a genetic algorithm to train said neural network. We then attempted to use Neuroevolution to learn how best to control a robot from scratch; this can be described as a holistic approach. Our second attempt was based on Ant Colony Optimization (ACO). It was less ambitions than our first approach, and attempted to come up with the best combination of pre-designed, modular strategies to defeat an opponent. In addition, we also applied Neuroevolution to fine tune ACO, once it found a good strategy. In order to compare the performance of ACO against another method to analyse its ability to learn such a strategy, a genetic algorithm was also used.
+
+
+\subsection{Ant Colony Optimization}
+\input{introduction/aco}
+\subsection{Genetic Algorithms}
+\input{introduction/ga}
+\subsection{Neuroevolution}
+\input{introduction/neuroevolution}
+
+
