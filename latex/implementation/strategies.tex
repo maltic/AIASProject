@@ -9,13 +9,15 @@ The robot which implements each solution for the purposes of calculating fitness
 \centering
 \begin{tabular}{|l|l|}
 \hline
-Movement & TODO \\
+Movement & ID 0: CircleMovement, ID 1: TightCircleMovement, \\ &  ID 2: BigCircleMovement,
+ID 3: SpiralMovement, \\ & ID 4: RandomAngleMovement, ID 5: BackwardCircleMovement \\
 \hline
-Firing & TODO \\
+Firing & ID 0: WeakFire, ID 1 StrongFire, \\ &  ID 2: CloseFire, ID 3: FireIfSlow, \\ & ID 4: MediumFire, ID 5: MaxStrengthFire \\
 \hline
-Scanning & TODO \\
+Scanning & ID 0: MatchSlowRobotScan (matches the robot's heading, slowly),\\ &  ID 1: FastSpinScan, \\ & ID 2: SlowPredictiveScan (tries to get a scan lock, slow moving), \\ &  ID 3: SlowSpinScan \\
 \hline
-Gun Movement & TODO \\
+Gun Movement & ID 0 SlowFollowScannerGun, ID 1: FastFollowScannerGun, \\ & 
+ ID 2: SlowSpinGun, ID 3: FastSpinGun, \\ &  ID 4: FollowEnemyGun \\
 \hline
 \end{tabular}
 \caption{A Summary of the Strategies Combined in to form the Solution-Space of the Ant Colony Optimization and Genetic Algorithms}
