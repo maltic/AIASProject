@@ -5,6 +5,12 @@ import java.util.Random;
 import robotrain.GenericFitness;
 import neuralnet.NeuralNetwork;
 
+/**
+ * A potential neural network weight configuration for neuroevolution
+ * 
+ * @author Max
+ * 
+ */
 public class Genome implements Comparable<Genome> {
 	protected final double[] weights;
 	protected final double fitness;
@@ -27,7 +33,6 @@ public class Genome implements Comparable<Genome> {
 
 	public Genome(GenericFitness<NeuralNetwork> f, NeuralNetwork nn, int size) {
 		weights = new double[size];
-		// was 16
 		for (int i = 0; i < size; ++i)
 			weights[i] += (r.nextBoolean()) ? r.nextDouble() * 15 : -r
 					.nextDouble() * 15;
@@ -39,7 +44,6 @@ public class Genome implements Comparable<Genome> {
 		int mutations = r.nextInt(weights.length / 2);
 		double[] w = this.weights.clone();
 		for (int i = 0; i < mutations; ++i) {
-			// was 3
 			w[r.nextInt(weights.length)] += (r.nextBoolean()) ? r.nextDouble() * 3
 					: -r.nextDouble() * 3;
 		}

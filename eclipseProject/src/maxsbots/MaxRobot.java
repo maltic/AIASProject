@@ -9,6 +9,12 @@ import neuralnet.NeuralNetwork;
 import robocode.*;
 import robotrain.BattleRunner;
 
+/**
+ * A testing bot, just ignore it, I'm not sure why its still here.
+ * 
+ * @author Max
+ * 
+ */
 public class MaxRobot extends AdvancedRobot {
 	private NeuralNetwork nn;
 

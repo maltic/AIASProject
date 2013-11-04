@@ -9,12 +9,27 @@ import java.util.Random;
 import robotrain.GenericFitness;
 import neuralnet.NeuralNetwork;
 
+/**
+ * An implementation of neuroevolution
+ * 
+ * @author Max
+ * 
+ */
 public class NeuroEvolver {
 	protected Genome[][] populations;
 	protected NeuralNetwork nn;
 	protected GenericFitness<NeuralNetwork> f;
+	/**
+	 * % chance of mutation
+	 */
 	public float mutationRate = 0.6f;
+	/**
+	 * % change of crossover
+	 */
 	public float crossoverRate = 0.35f;
+	/**
+	 * Amount of population to select
+	 */
 	public float trunkRatio = 0.5f;
 	public int keepNum = 1;
 	protected static Random r = new Random();

@@ -8,11 +8,19 @@ import robotrain.BattleRunner;
 import neuralnet.BiasNN;
 import neuralnet.NeuralNetwork;
 
+/**
+ * A bot that is controlled by both a script (see ScriptBot) and also uses a
+ * neural network to control its firs threshold function.
+ * 
+ * @author Max
+ * 
+ */
 public class NNScriptBot extends ScriptBot {
 	NeuralNetwork nn;
 
 	@Override
 	public void run() {
+		// load the neural network
 		try {
 			FileReader fr = new FileReader(BattleRunner.RobocodePath
 					+ "/robots/maxsbots/scriptBotNNSpec");
@@ -31,9 +39,11 @@ public class NNScriptBot extends ScriptBot {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		// now just act like a script
 		super.run();
 	}
 
+	// overload with neural network
 	@Override
 	protected boolean fireThreshold(double dist, int age) {
 		// input vector is normalized first

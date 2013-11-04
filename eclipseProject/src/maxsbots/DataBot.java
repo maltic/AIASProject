@@ -7,8 +7,23 @@ import java.util.HashMap;
 import robocode.*;
 import robotrain.BattleRunner;
 
+/**
+ * A simple bot that goes in circles and shoots an enemy when it sees it. We
+ * used this bot to collect information about firing for statistical analysis.
+ * Unfortunaltey we didn't get time to follow through with learning from the
+ * data collected.
+ * 
+ * @author Max
+ * 
+ */
 public class DataBot extends AdvancedRobot {
 
+	/**
+	 * Meta-Information about a bullet collected at the time it was fired
+	 * 
+	 * @author Max
+	 * 
+	 */
 	private class BulletData {
 		public double x, y, dist, energyMe, energyEnemy, velocity, heading;
 
@@ -56,6 +71,7 @@ public class DataBot extends AdvancedRobot {
 	}
 
 	public void onRoundEnded(RoundEndedEvent event) {
+		// append all the hit and miss information to file
 		try {
 			RobocodeFileWriter fw = new RobocodeFileWriter(
 					BattleRunner.RobocodePath

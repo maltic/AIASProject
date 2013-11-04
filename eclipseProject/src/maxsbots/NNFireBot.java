@@ -9,6 +9,13 @@ import neuralnet.NeuralNetwork;
 import robocode.*;
 import robotrain.BattleRunner;
 
+/**
+ * A robot that uses a neural network to control its fire function. Just ignore
+ * this, it never went anywhere.
+ * 
+ * @author Max
+ * 
+ */
 public class NNFireBot extends AdvancedRobot {
 
 	private NeuralNetwork nn;
@@ -46,8 +53,8 @@ public class NNFireBot extends AdvancedRobot {
 		double dist = e.getDistance() / 1000.0;
 		double velocity = (e.getVelocity() + 8.0) / 16.0;
 		double eheading = e.getHeading() / 360.0;
-		double out = nn.feedForward(new double[] { x, y, heading,
-				velocity, eheading, dist })[0];
+		double out = nn.feedForward(new double[] { x, y, heading, velocity,
+				eheading, dist })[0];
 		if (out > 0.5)
 			fire(1.0);
 	}
